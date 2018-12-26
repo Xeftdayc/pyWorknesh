@@ -24,45 +24,38 @@ class Persona:
         
         #Name input 
         Label(frame, text = 'Nombre: ').grid(row = 2, column = 0)
-        self.nombre = Entry(frame)
-        self.nombre.focus()
-        self.nombre.grid(row = 2, column = 1)
+        self.Nombre = Entry(frame)
+        self.Nombre.grid(row = 2, column = 1)
 
         #Name input
         Label(frame, text = 'Apellidos: ').grid(row = 3, column = 0)
         self.Apellidos = Entry(frame)
-        self.Apellidos.focus()
         self.Apellidos.grid(row = 3, column = 1)
 
         #Name input
         Label(frame, text = 'Sexo: ').grid(row = 4, column = 0)
-        self.Apellidos = Entry(frame)
-        self.Apellidos.focus()
-        self.Apellidos.grid(row = 3, column = 1)
+        self.Sexo = Entry(frame)
+        self.Sexo.grid(row = 4, column = 1)
 
         #Name input 
         Label(frame, text = 'Direccion: ').grid(row = 5, column = 0)
         self.Direccion = Entry(frame)
-        self.Direccion.focus()
-        self.Direccion.grid(row = 4, column = 1)
+        self.Direccion.grid(row = 5, column = 1)
 
         #Name input 
         Label(frame, text = 'Fecha Nacimiento: ').grid(row = 6, column = 0)
         self.FechaN = Entry(frame)
-        self.FechaN.focus()
-        self.FechaN.grid(row = 5, column = 1)
+        self.FechaN.grid(row = 6, column = 1)
 
         #Name input 
         Label(frame, text = 'Email: ').grid(row = 7, column = 0)
         self.Email = Entry(frame)
-        self.Email.focus()
-        self.Email.grid(row = 6, column = 1)
+        self.Email.grid(row = 7, column = 1)
 
         #Name input 
         Label(frame, text = 'Numero Movil: ').grid(row = 8, column = 0)
         self.Nromovil = Entry(frame)
-        self.Nromovil.focus()
-        self.Nromovil.grid(row = 7, column = 1)
+        self.Nromovil.grid(row = 8, column = 1)
 
         #Button add Persona
         ttk.Button(frame,text = 'Guardar Datos').grid(row = 9,columnspan = 2, sticky = W + E)
@@ -81,7 +74,7 @@ class Persona:
         self.tree.heading('B', text ='Apellidos', anchor = CENTER)
         self.tree.column('B', width=100)
         self.tree.heading('C', text ='Sexo', anchor = CENTER)
-        self.tree.column('C', width=100)
+        self.tree.column('C', width=50)
         self.tree.heading('D', text ='Direccion', anchor = CENTER)
         self.tree.column('D', width=100)
         self.tree.heading('E', text ='Fecha Nacimiento', anchor = CENTER)
@@ -90,6 +83,8 @@ class Persona:
         self.tree.column('F', width=100)
         self.tree.heading('G', text ='Numero Movil', anchor = CENTER)
         self.tree.column('G', width=100)
+
+        ttk.Style().configure("Treeview", font = ('', 11), background="#383838", foreground="white")
 
         #Buttons
         ttk.Button(text = 'ELIMINAR').grid(row = 10, column = 0, stick = W + E)
@@ -114,15 +109,15 @@ class Persona:
         # gettin data 
         query = 'SELECT * FROM tDatos ORDER BY nombre DESC'
         db_rows = self.run_query(query)
-        #filling data
+        # filling data
         for row in db_rows:
-            self.tree.insert('', 0, text = row[1], values = row[2])
-            #print(row)
+            self.tree.insert('', 'end', 0, text = row[1], values = row[2])
+            print(row)
 
 
     #user input validation 
     def validation(self):
-        return len(self.name.get()) !=0 and len(self.price.get()) !=0
+        return len(self.DNI.get()) !=0 and len(self.Nombre.get()) !=0 and len(self.Apellidos.get()) !=0
 
     def add_persona(self):
         if self.validation():
@@ -139,7 +134,7 @@ class Persona:
             self.Email.delete(0,END)
             self.Nromovil.delete(0,END)
         else:
-            self.message['text'] = 'DNI and Nombre and Apellidos and Direccion and FechaN and Email and Nromovil is Required'
+            self.message['text'] = 'Datos input is Required'
         self.get_persona()
 
 
