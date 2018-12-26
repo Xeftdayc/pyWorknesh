@@ -1,6 +1,6 @@
 from tkinter import ttk 
 from tkinter import *
-
+import tkinter as tk
 import sqlite3
 
 class Persona:
@@ -60,29 +60,27 @@ class Persona:
         #Button add Persona
         ttk.Button(frame,text = 'Guardar Datos').grid(row = 9,columnspan = 2, sticky = W + E)
 
-        #Table
-
-        #--- Nueva ventana---
-        #root = Tk()
-        self.tree = ttk.Treeview(selectmode="extended", height = 10, columns = ("A","B","C","D","E","F","G"))
-        
+        # Tabla de Contenido
+        self.tree = ttk.Treeview(height = 10, columns = ('1','2','3','4','5','6','7','8','9'), show="headings")
         self.tree.grid(row = 9, column = 0, columnspan = 2)
-        self.tree.heading('#0', text ='DNI', anchor = CENTER)
-        self.tree.column('#0', width=100)
-        self.tree.heading('A', text ='Nombre', anchor = CENTER)
-        self.tree.column('A', width=100)
-        self.tree.heading('B', text ='Apellidos', anchor = CENTER)
-        self.tree.column('B', width=100)
-        self.tree.heading('C', text ='Sexo', anchor = CENTER)
-        self.tree.column('C', width=50)
-        self.tree.heading('D', text ='Direccion', anchor = CENTER)
-        self.tree.column('D', width=100)
-        self.tree.heading('E', text ='Fecha Nacimiento', anchor = CENTER)
-        self.tree.column('E', width=100)
-        self.tree.heading('F', text ='Email', anchor = CENTER)
-        self.tree.column('F', width=100)
-        self.tree.heading('G', text ='Numero Movil', anchor = CENTER)
-        self.tree.column('G', width=100)
+        self.tree.heading('1', text ='ID')
+        self.tree.column('1', width=30, anchor = 'center')
+        self.tree.heading('2', text ='DNI')
+        self.tree.column('2', width=80, anchor = 'center')
+        self.tree.heading('3', text ='Nombre')
+        self.tree.column('3', width=100, anchor = 'center')
+        self.tree.heading('4', text ='Apellidos')
+        self.tree.column('4', width=100, anchor = 'center')
+        self.tree.heading('5', text ='Sexo')
+        self.tree.column('5', width=40, anchor = 'center')
+        self.tree.heading('6', text ='Direccion')
+        self.tree.column('6', width=100, anchor = 'center')
+        self.tree.heading('7', text ='F. Nacimiento')
+        self.tree.column('7', width=100, anchor = 'center')
+        self.tree.heading('8', text ='Email')
+        self.tree.column('8', width=100, anchor = 'center')
+        self.tree.heading('9', text ='Numero Movil')
+        self.tree.column('9', width=100, anchor = 'center')
 
         ttk.Style().configure("Treeview", font = ('', 11), background="#383838", foreground="white")
 
@@ -111,13 +109,14 @@ class Persona:
         db_rows = self.run_query(query)
         # filling data
         for row in db_rows:
-            self.tree.insert('', 'end', 0, text = row[1], values = row[2])
+            self.tree.insert("", tk.END, values=row)
             print(row)
 
 
     #user input validation 
     def validation(self):
-        return len(self.DNI.get()) !=0 and len(self.Nombre.get()) !=0 and len(self.Apellidos.get()) !=0
+        return len(self.DNI.get()) !=0 and len(self.Nombre.get()) !=0 and len(self.Apellidos.get()) !=0 and len(self.Sexo.get()) !=0 \
+        and len(self.Direccion.get()) !=0 and len(self.FechaN.get()) !=0 and len(self.Email.get()) !=0 and len(self.Nromovil.get()) !=0
 
     def add_persona(self):
         if self.validation():
