@@ -5,7 +5,7 @@ import sqlite3
 
 class Persona:
     # connection dir property
-    db_name = 'worknesh.db'
+    db_name = 'dbworknesh.db'
 
     def __init__(self, window):
         #initializations
@@ -34,38 +34,44 @@ class Persona:
         self.Apellidos.focus()
         self.Apellidos.grid(row = 3, column = 1)
 
+        #Name input
+        Label(frame, text = 'Sexo: ').grid(row = 4, column = 0)
+        self.Apellidos = Entry(frame)
+        self.Apellidos.focus()
+        self.Apellidos.grid(row = 3, column = 1)
+
         #Name input 
-        Label(frame, text = 'Direccion: ').grid(row = 4, column = 0)
+        Label(frame, text = 'Direccion: ').grid(row = 5, column = 0)
         self.Direccion = Entry(frame)
         self.Direccion.focus()
         self.Direccion.grid(row = 4, column = 1)
 
         #Name input 
-        Label(frame, text = 'Fecha Nacimiento: ').grid(row = 5, column = 0)
+        Label(frame, text = 'Fecha Nacimiento: ').grid(row = 6, column = 0)
         self.FechaN = Entry(frame)
         self.FechaN.focus()
         self.FechaN.grid(row = 5, column = 1)
 
         #Name input 
-        Label(frame, text = 'Email: ').grid(row = 6, column = 0)
+        Label(frame, text = 'Email: ').grid(row = 7, column = 0)
         self.Email = Entry(frame)
         self.Email.focus()
         self.Email.grid(row = 6, column = 1)
 
         #Name input 
-        Label(frame, text = 'Numero Movil: ').grid(row = 7, column = 0)
+        Label(frame, text = 'Numero Movil: ').grid(row = 8, column = 0)
         self.Nromovil = Entry(frame)
         self.Nromovil.focus()
         self.Nromovil.grid(row = 7, column = 1)
 
         #Button add Persona
-        ttk.Button(frame,text = 'Guardar Datos').grid(row = 8,columnspan = 2, sticky = W + E)
+        ttk.Button(frame,text = 'Guardar Datos').grid(row = 9,columnspan = 2, sticky = W + E)
 
         #Table
 
         #--- Nueva ventana---
         #root = Tk()
-        self.tree = ttk.Treeview(selectmode="extended", height = 10, columns = ("A","B","C","D","E","F"))
+        self.tree = ttk.Treeview(selectmode="extended", height = 10, columns = ("A","B","C","D","E","F","G"))
         
         self.tree.grid(row = 9, column = 0, columnspan = 2)
         self.tree.heading('#0', text ='DNI', anchor = CENTER)
@@ -74,14 +80,16 @@ class Persona:
         self.tree.column('A', width=100)
         self.tree.heading('B', text ='Apellidos', anchor = CENTER)
         self.tree.column('B', width=100)
-        self.tree.heading('C', text ='Direccion', anchor = CENTER)
+        self.tree.heading('C', text ='Sexo', anchor = CENTER)
         self.tree.column('C', width=100)
-        self.tree.heading('D', text ='Fecha Nacimiento', anchor = CENTER)
+        self.tree.heading('D', text ='Direccion', anchor = CENTER)
         self.tree.column('D', width=100)
-        self.tree.heading('E', text ='Email', anchor = CENTER)
+        self.tree.heading('E', text ='Fecha Nacimiento', anchor = CENTER)
         self.tree.column('E', width=100)
-        self.tree.heading('F', text ='Numero Movil', anchor = CENTER)
+        self.tree.heading('F', text ='Email', anchor = CENTER)
         self.tree.column('F', width=100)
+        self.tree.heading('G', text ='Numero Movil', anchor = CENTER)
+        self.tree.column('G', width=100)
 
         #Buttons
         ttk.Button(text = 'ELIMINAR').grid(row = 10, column = 0, stick = W + E)
@@ -104,7 +112,7 @@ class Persona:
         for element in records:
             self.tree.delete(element)
         # gettin data 
-        query = 'SELECT * FROM tdatos ORDER BY nombre DESC'
+        query = 'SELECT * FROM tDatos ORDER BY nombre DESC'
         db_rows = self.run_query(query)
         #filling data
         for row in db_rows:
@@ -118,13 +126,14 @@ class Persona:
 
     def add_persona(self):
         if self.validation():
-            query = 'INSERT INTO persona VALUES(NULL,?,?,?,?,?,?)'
-            parameters = (self.DNI.get(), self.Nombre.get(), self.Apellidos.get(), self.Direccion.get(), self.FechaN.get(), self.Email.get(), self.Nromovil.get() )
+            query = 'INSERT INTO tDatos VALUES(NULL,?,?,?,?,?,?)'
+            parameters = (self.DNI.get(), self.Nombre.get(), self.Apellidos.get(), self.Sexo.get(), self.Direccion.get(), self.FechaN.get(), self.Email.get(), self.Nromovil.get() )
             self.run_query(query, parameters)
             self.message['text'] = 'persona {} added Successfully'.format(self.DNI.get())
             self.DNI.delete(0,END)
             self.Nombre.delete(0,END)
             self.Apellidos.delete(0,END)
+            self.Sexo.delete(0,END)
             self.Direccion.delete(0,END) 
             self.FechaN.delete(0,END)
             self.Email.delete(0,END)
