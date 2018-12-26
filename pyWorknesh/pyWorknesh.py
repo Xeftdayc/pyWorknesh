@@ -12,55 +12,59 @@ class Persona:
         self.wind = window
         self.wind.title('Registro de Worknesh')
 
-        #creating a frame container
+        # Creating a frame container
         frame = LabelFrame(self.wind, text = 'Registrar Datos')
         frame.grid(row = 0, column = 0, columnspan = 3, pady = 20)
 
-        #Name input 
+        # DNI Input
         Label(frame, text = 'DNI: ').grid(row = 1, column = 0)
         self.DNI = Entry(frame)
         self.DNI.focus()
-        self.DNI.grid(row = 1, column = 1)       
+        self.DNI.grid(row = 1, column = 1)
         
-        #Name input 
+        # Name Input
         Label(frame, text = 'Nombre: ').grid(row = 2, column = 0)
         self.Nombre = Entry(frame)
         self.Nombre.grid(row = 2, column = 1)
 
-        #Name input
+        # Apellidos input
         Label(frame, text = 'Apellidos: ').grid(row = 3, column = 0)
         self.Apellidos = Entry(frame)
         self.Apellidos.grid(row = 3, column = 1)
 
-        #Name input
+        # Sexo input
         Label(frame, text = 'Sexo: ').grid(row = 4, column = 0)
         self.Sexo = Entry(frame)
         self.Sexo.grid(row = 4, column = 1)
 
-        #Name input 
+        # Direccion input 
         Label(frame, text = 'Direccion: ').grid(row = 5, column = 0)
         self.Direccion = Entry(frame)
         self.Direccion.grid(row = 5, column = 1)
 
-        #Name input 
+        # FechaN input 
         Label(frame, text = 'Fecha Nacimiento: ').grid(row = 6, column = 0)
         self.FechaN = Entry(frame)
         self.FechaN.grid(row = 6, column = 1)
 
-        #Name input 
+        # Email input 
         Label(frame, text = 'Email: ').grid(row = 7, column = 0)
         self.Email = Entry(frame)
         self.Email.grid(row = 7, column = 1)
 
-        #Name input 
+        # Movil Input
         Label(frame, text = 'Numero Movil: ').grid(row = 8, column = 0)
         self.Nromovil = Entry(frame)
         self.Nromovil.grid(row = 8, column = 1)
 
-        #Button add Persona
-        ttk.Button(frame,text = 'Guardar Datos').grid(row = 9,columnspan = 2, sticky = W + E)
+        # Button add Persona
+        ttk.Button(frame,text = 'Guardar Datos', command = self.add_persona).grid(row = 9,columnspan = 2, sticky = W + E)
 
-        # Tabla de Contenido
+        # Output Messages
+        self.message = Label(text = '', fg = 'red')
+        self.message.grid(row = 3, column = 0, columnspan = 2, sticky = W+E)
+        
+        # Table
         self.tree = ttk.Treeview(height = 10, columns = ('1','2','3','4','5','6','7','8','9'), show="headings")
         self.tree.grid(row = 9, column = 0, columnspan = 2)
         self.tree.heading('1', text ='ID')
@@ -84,46 +88,46 @@ class Persona:
 
         ttk.Style().configure("Treeview", font = ('', 11), background="#383838", foreground="white")
 
-        #Buttons
+        # Buttons
         ttk.Button(text = 'ELIMINAR').grid(row = 10, column = 0, stick = W + E)
         ttk.Button(text = 'EDITAR').grid(row = 10, column = 1, stick = W + E)
 
         # Filling the rows
         self.get_persona()
 
-    # function to execute database querys
+    # Function to execute database querys
     def run_query(self,query, parameters = ()):
         with sqlite3.connect(self.db_name) as conn:
             cursor = conn.cursor()
             result = cursor.execute(query,parameters)
             conn.commit()
         return result
-    #get persona from database
+    # Get persona from database
     def get_persona(self):
-        #cleaning table
+        # Cleaning table
         records = self.tree.get_children()
         for element in records:
             self.tree.delete(element)
-        # gettin data 
+        # Gettin data
         query = 'SELECT * FROM tDatos ORDER BY nombre DESC'
         db_rows = self.run_query(query)
-        # filling data
+        # Filling data
         for row in db_rows:
             self.tree.insert("", tk.END, values=row)
             print(row)
 
 
-    #user input validation 
+    # User input validation 
     def validation(self):
         return len(self.DNI.get()) !=0 and len(self.Nombre.get()) !=0 and len(self.Apellidos.get()) !=0 and len(self.Sexo.get()) !=0 \
         and len(self.Direccion.get()) !=0 and len(self.FechaN.get()) !=0 and len(self.Email.get()) !=0 and len(self.Nromovil.get()) !=0
 
     def add_persona(self):
         if self.validation():
-            query = 'INSERT INTO tDatos VALUES(NULL,?,?,?,?,?,?)'
+            query = 'INSERT INTO tDatos VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?)'
             parameters = (self.DNI.get(), self.Nombre.get(), self.Apellidos.get(), self.Sexo.get(), self.Direccion.get(), self.FechaN.get(), self.Email.get(), self.Nromovil.get() )
             self.run_query(query, parameters)
-            self.message['text'] = 'persona {} added Successfully'.format(self.DNI.get())
+            self.message['text'] = 'Registro de Persona {} added Successfully'.format(self.DNI.get())
             self.DNI.delete(0,END)
             self.Nombre.delete(0,END)
             self.Apellidos.delete(0,END)
