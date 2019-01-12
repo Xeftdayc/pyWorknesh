@@ -4,6 +4,8 @@ import sqlite3
 
 root = Tk()
 root.title("Worknesh: Modulo de Ingreso")
+#foto = PhotoImage(file="LOGO.png")
+#Label(root, image=foto).pack()
 width = 400
 height = 280
 screen_width = root.winfo_screenwidth()
@@ -102,9 +104,13 @@ def modRegistro():
     #Dashboard.resizable(0, 0)
 
     # Variables
-    tbArea = StringVar()
-    tbDetalle = StringVar()
-
+    tbBusqueda = StringVar()
+    tbCodigo = StringVar()
+    tbNombre = StringVar()
+    tbApellido_paterno = StringVar()
+    tbApellido_materno = StringVar()
+    tbFecha_de_inicio = StringVar()
+    tbPerido_de_trabajo = StringVar()
     # Frame o Grid
     Top = Frame(gRegistro, bd=2, relief=RIDGE)
     Top.pack(side=TOP, fill=X)
@@ -114,22 +120,42 @@ def modRegistro():
     # Labels
     lbTitle = Label(Top, text="Worknesh: Panel de Registro", font=('arial black', 18))
     lbTitle.pack(fill=X)
-    lbArea = Label(Form, text = "Area:", font=('arial', 14), bd=15)
-    lbArea.grid(row=0, sticky="e")
-    lbDetalle = Label(Form, text = "Detalles:", font=('arial', 14), bd=15)
-    lbDetalle.grid(row=1, sticky="e")
+    lbBusqueda = Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
+    lbBusqueda.grid(row=0, sticky="e")
+    lbCodigo = Label(Form, text = "Codigo:", font=('arial', 14), bd=15)
+    lbCodigo.grid(row=1, sticky="e",column=1)
+    lbNombre = Label(Form, text = "Nombre:", font=('arial', 14), bd=15)
+    lbNombre.grid(row=2, sticky="e",column=1)
+    lbApellido_paterno = Label(Form, text = "Apellido Paterno:", font=('arial', 14), bd=15)
+    lbApellido_paterno.grid(row=3, sticky="e",column=1)
+    lbApellido_materno = Label(Form, text = "Apellido Materno:", font=('arial', 14), bd=15)
+    lbApellido_materno.grid(row=1, sticky="e",column=3)
+    lbFecha_de_inicio = Label(Form, text = "Fecha de inicio:", font=('arial', 14), bd=15)
+    lbFecha_de_inicio.grid(row=2, sticky="e",column=3)
+    lbPeriodo_de_trabajo = Label(Form, text = "Periodo de trabajo:", font=('arial', 14), bd=15)
+    lbPeriodo_de_trabajo.grid(row=3, sticky="e",column=3)
     lbl_text = Label(Form)
     lbl_text.grid(row=2, columnspan=2)
 
     # Text o Entrys
-    tbArea = Entry(Form, textvariable=tbArea, font=(14))
-    tbArea.grid(row=0, column=1)
-    tbDetalle = Entry(Form, textvariable=tbDetalle, font=(14))
-    tbDetalle.grid(row=1, column=1)
+    tbBusqueda = Entry(Form, textvariable=tbBusqueda, font=(14))
+    tbBusqueda.grid(row=0, column=1)
+    tbCodigo = Entry(Form, textvariable=tbCodigo, font=(14))
+    tbCodigo.grid(row=1, column=2)
+    tbNombre = Entry(Form, textvariable=tbNombre, font=(14))
+    tbNombre.grid(row=2, column=2)
+    tbApellido_paterno = Entry(Form, textvariable=tbApellido_paterno, font=(14))
+    tbApellido_paterno.grid(row=3, column=2)
+    tbApellido_materno = Entry(Form, textvariable=tbApellido_materno, font=(14))
+    tbApellido_materno.grid(row=1, column=4)
+    tbFecha_de_inicio = Entry(Form, textvariable=tbFecha_de_inicio, font=(14))
+    tbFecha_de_inicio.grid(row=2, column=4)
+    tbPeriodo_de_trabajo = Entry(Form, textvariable=tbPerido_de_trabajo, font=(14))
+    tbPerido_de_trabajo.grid(row=3, column=4)
 
     # Buttons
     btnAdd = Button(Form, text="Agregar Registro", width=80)
-    btnAdd.grid(pady=25, row=3, columnspan=2)
+    btnAdd.grid(pady=25, row=5, columnspan=1)
 
 
 def Back():
@@ -139,8 +165,13 @@ def Back():
 #==============================VARIABLES======================================
 USERNAME = StringVar()
 PASSWORD = StringVar()
-tbArea = StringVar()
-tbDetalle = StringVar()
+tbBusqueda = StringVar()
+tbCodigo = StringVar()
+tbNombre = StringVar()
+tbApellido_paterno = StringVar()
+tbApellido_materno = StringVar()
+tbFecha_de_inicio = StringVar()
+tbPerido_de_trabajo = StringVar()
 
 #==============================FRAMES=========================================
 Top = Frame(root, bd=2,  relief=RIDGE)
