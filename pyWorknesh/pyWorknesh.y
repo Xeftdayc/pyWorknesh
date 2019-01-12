@@ -4,12 +4,10 @@ import sqlite3
 
 root = Tk()
 root.title("Worknesh: Modulo de Ingreso")
-
-foto = PhotoImage(file="LOGO.png")
-Label(root, image=foto).pack()
-
-width = 600
-height = 500
+#foto = PhotoImage(file="LOGO.png")
+#Label(root, image=foto).pack()
+width = 400
+height = 280
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 x = (screen_width/2) - (width/2)
@@ -52,8 +50,6 @@ def Dashboard():
     root.withdraw()
     gDash = Toplevel()
     gDash.title("Worknes: Dashboard - Panel Administrativo")
-    foto = PhotoImage(file="LOGO.png")
-    Label(root, image=foto).pack()
     width = 1280
     height = 700
     screen_height = root.winfo_screenwidth()
@@ -98,8 +94,6 @@ def modRegistro():
     gDash.withdraw()
     gRegistro = Toplevel()
     gRegistro.title("Worknes: Dashboard - Modulo de Registro")
-    foto = PhotoImage(file="LOGO.png")
-    Label(root, image=foto).pack()
     width = 1280
     height = 700
     screen_height = root.winfo_screenwidth()
@@ -113,16 +107,15 @@ def modRegistro():
     tbBusqueda = StringVar()
     tbCodigo = StringVar()
     tbNombre = StringVar()
-    tbPaterno = StringVar()
-    tbMaterno = StringVar()
-    tbFInicio = StringVar()
-    tbPeriodoT = StringVar()
-
+    tbApellido_paterno = StringVar()
+    tbApellido_materno = StringVar()
+    tbFecha_de_inicio = StringVar()
+    tbPerido_de_trabajo = StringVar()
     # Frame o Grid
-    Top = Frame(gRegistro, bd=3, relief=RIDGE, width=1280, height=700)
+    Top = Frame(gRegistro, bd=2, relief=RIDGE)
     Top.pack(side=TOP, fill=X)
-    Form = Frame(gRegistro, width=1280, height=700)
-    Form.pack(side=TOP, pady=10)
+    Form = Frame(gRegistro, height=400)
+    Form.pack(side=TOP, pady=20)
 
     # Labels
     lbTitle = Label(Top, text="Worknesh: Panel de Registro", font=('arial black', 18))
@@ -133,19 +126,16 @@ def modRegistro():
     lbCodigo.grid(row=1, sticky="e",column=1)
     lbNombre = Label(Form, text = "Nombre:", font=('arial', 14), bd=15)
     lbNombre.grid(row=2, sticky="e",column=1)
-    lbPaterno = Label(Form, text = "Apellido Paterno:", font=('arial', 14), bd=15)
-    lbPaterno.grid(row=3, sticky="e",column=1)
-    lbMaterno = Label(Form, text = "Apellido Materno:", font=('arial', 14), bd=15)
-    lbMaterno.grid(row=1, sticky="e",column=3)
-    lbFInicio = Label(Form, text = "Fecha de inicio:", font=('arial', 14), bd=15)
-    lbFInicio.grid(row=2, sticky="e",column=3)
-    lbPeriodoT = Label(Form, text = "Periodo de trabajo:", font=('arial', 14), bd=15)
-    lbPeriodoT.grid(row=3, sticky="e",column=3)
+    lbApellido_paterno = Label(Form, text = "Apellido Paterno:", font=('arial', 14), bd=15)
+    lbApellido_paterno.grid(row=3, sticky="e",column=1)
+    lbApellido_materno = Label(Form, text = "Apellido Materno:", font=('arial', 14), bd=15)
+    lbApellido_materno.grid(row=1, sticky="e",column=3)
+    lbFecha_de_inicio = Label(Form, text = "Fecha de inicio:", font=('arial', 14), bd=15)
+    lbFecha_de_inicio.grid(row=2, sticky="e",column=3)
+    lbPeriodo_de_trabajo = Label(Form, text = "Periodo de trabajo:", font=('arial', 14), bd=15)
+    lbPeriodo_de_trabajo.grid(row=3, sticky="e",column=3)
     lbl_text = Label(Form)
-    lbl_text.grid(row=4, columnspan=3)
-
-    foto = PhotoImage(file="LOGO.png")
-    Label(root, image=foto).pack()
+    lbl_text.grid(row=2, columnspan=2)
 
     # Text o Entrys
     tbBusqueda = Entry(Form, textvariable=tbBusqueda, font=(14))
@@ -154,20 +144,18 @@ def modRegistro():
     tbCodigo.grid(row=1, column=2)
     tbNombre = Entry(Form, textvariable=tbNombre, font=(14))
     tbNombre.grid(row=2, column=2)
-    tbPaterno = Entry(Form, textvariable=tbPaterno, font=(14))
-    tbPaterno.grid(row=3, column=2)
-    tbMaterno = Entry(Form, textvariable=tbMaterno, font=(14))
-    tbMaterno.grid(row=1, column=4)
-    tbFInicio = Entry(Form, textvariable=tbFInicio, font=(14))
-    tbFInicio.grid(row=2, column=4)
-    tbPeriodoT = Entry(Form, textvariable=tbPeriodoT, font=(14))
-    tbPeriodoT.grid(row=3, column=4)
+    tbApellido_paterno = Entry(Form, textvariable=tbApellido_paterno, font=(14))
+    tbApellido_paterno.grid(row=3, column=2)
+    tbApellido_materno = Entry(Form, textvariable=tbApellido_materno, font=(14))
+    tbApellido_materno.grid(row=1, column=4)
+    tbFecha_de_inicio = Entry(Form, textvariable=tbFecha_de_inicio, font=(14))
+    tbFecha_de_inicio.grid(row=2, column=4)
+    tbPeriodo_de_trabajo = Entry(Form, textvariable=tbPerido_de_trabajo, font=(14))
+    tbPerido_de_trabajo.grid(row=3, column=4)
 
     # Buttons
     btnAdd = Button(Form, text="Agregar Registro", width=80)
-    btnAdd.grid(pady=25, row=4, columnspan=3)
-
-    
+    btnAdd.grid(pady=25, row=5, columnspan=1)
 
 
 def Back():
