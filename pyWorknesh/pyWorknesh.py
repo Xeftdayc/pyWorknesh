@@ -87,8 +87,9 @@ def Dashboard():
     lbTitle.pack(fill=X)
     btnLogout = Button(gDash, text='Cerrar Seccion', command=Back).pack(pady=20, fill=X)
     btnRegistro = Button(gDash, text='Modulo Registro', command=modRegistro).pack(pady=20, fill=X)
-    btnVaca = Button(gDash, text='Modulo Vacaciones', command=modVaca).pack(pady=20, fill=X)
+    btnVacaciones = Button(gDash, text='Modulo Vacaciones', command=modVacaciones).pack(pady=20, fill=X)
     btnAsistencia = Button(gDash, text='Modulo Asistencia', command=modAsistencia).pack(pady=20, fill=X)
+    btnPapeletas = Button(gDash, text='Modulo Papeletas', command=modPapeletas).pack(pady=20, fill=X)
     Label(gDash, text="Successfully Login!", font=('times new roman', 20)).pack()
 
     # Buttons
@@ -169,11 +170,11 @@ def modRegistro():
     btnAdd.grid(pady=25, row=4, columnspan=3)
 
 
-def modVaca():
-    global modVaca
+def modVacaciones():
+    global modVacaciones
     #gDash.withdraw()
-    modVaca = Toplevel()
-    modVaca.title("Worknes: Dashboard - Modulo de Vaca")
+    modVacaciones = Toplevel()
+    modVacaciones.title("Worknes: Dashboard - Modulo de Vaca")
     foto = PhotoImage(file="LOGO.png")
     Label(root, image=foto).pack()
     width = 1280
@@ -182,7 +183,7 @@ def modVaca():
     screen_width = root.winfo_screenheight()
     x = (screen_width/1) - (width/1.7)
     y = (screen_height/15) - (height/15)
-    modVaca.geometry("%dx%d+%d+%d" % (width, height, x, y))
+    modVacaciones.geometry("%dx%d+%d+%d" % (width, height, x, y))
     #Dashboard.resizable(0, 0)
 
     # Variables
@@ -193,9 +194,9 @@ def modVaca():
     tbDetalle = StringVar()
 
     # Frame o Grid
-    Top = Frame(modVaca, bd=3, relief=RIDGE, width=1280, height=700)
+    Top = Frame(modVacaciones, bd=3, relief=RIDGE, width=1280, height=700)
     Top.pack(side=TOP, fill=X)
-    Form = Frame(modVaca, width=1280, height=700)
+    Form = Frame(modVacaciones, width=1280, height=700)
     Form.pack(side=TOP, pady=10)
 
     # Labels
@@ -234,7 +235,6 @@ def modVaca():
     # Buttons
     btnAdd = Button(Form, text="Agregar Registro", width=80)
     btnAdd.grid(pady=25, row=4, columnspan=3)
-
   
 def modAsistencia():
     global gAsistencia
@@ -310,6 +310,80 @@ def modAsistencia():
     # Buttons
     btnAdd = Button(Form, text="Agregar Registro", width=80)
     btnAdd.grid(pady=25, row=15, columnspan=3)
+
+def modPapeletas():
+    global gPapeletas
+    #gPapeletas.withdraw()
+    gPapeletas = Toplevel()
+    gPapeletas.title("Worknes: Dashboard - Modulo de Papeletas")
+    foto = PhotoImage(file="LOGO.png")
+    Label(root, image=foto).pack()
+    width = 1280
+    height = 700
+    screen_height = root.winfo_screenwidth()
+    screen_width = root.winfo_screenheight()
+    x = (screen_width/1) - (width/1.7)
+    y = (screen_height/15) - (height/15)
+    gPapeletas.geometry("%dx%d+%d+%d" % (width, height, x, y))
+    #Dashboard.resizable(0, 0)
+
+    # Variables
+    tbBusqueda = StringVar()
+    tbCodigo = StringVar()
+    tbNombre = StringVar()
+    tbPaterno = StringVar()
+    tbMaterno = StringVar()
+    tbFInicio = StringVar()
+    tbHSalida = StringVar()
+
+    # Frame o Grid
+    Top = Frame(gPapeletas, bd=3, relief=RIDGE, width=1280, height=700)
+    Top.pack(side=TOP, fill=X)
+    Form = Frame(gPapeletas, width=1280, height=700)
+    Form.pack(side=TOP, pady=10)
+    Botones = Frame(gPapeletas, width=1280, height=700)
+    Botones.pack(side=TOP, pady=10)
+
+    # Labels
+    lbTitle = Label(Top, text="Worknesh: Panel de Papeletas", font=('arial black', 18))
+    lbTitle.pack(fill=X)
+    lbBusqueda = Label(Form, text = "Busqueda:", font=('arial', 14), bd=15)
+    lbBusqueda.grid(row=0, sticky="e")
+    lbCodigo = Label(Form, text = "Codigo:", font=('arial', 14), bd=15)
+    lbCodigo.grid(row=1, sticky="e",column=1)
+    lbNombre = Label(Form, text = "Nombre:", font=('arial', 14), bd=15)
+    lbNombre.grid(row=2, sticky="e",column=1)
+    lbPaterno = Label(Form, text = "Apellido Paterno:", font=('arial', 14), bd=15)
+    lbPaterno.grid(row=3, sticky="e",column=1)
+    lbMaterno = Label(Form, text = "Apellido Materno:", font=('arial', 14), bd=15)
+    lbMaterno.grid(row=1, sticky="e",column=3)
+    lbFInicio = Label(Form, text = "Fecha actual:", font=('arial', 14), bd=15)
+    lbFInicio.grid(row=2, sticky="e",column=3)
+    lbHoraSalida= Label(Form, text = "Hora de salida: ", font=('arial', 14), bd=15)
+    lbHoraSalida.grid(row=3, sticky="e",column=3)
+    Label(root, image=foto).pack()
+
+    # Text o Entrys
+    tbBusqueda = Entry(Form, textvariable=tbBusqueda, font=(14))
+    tbBusqueda.grid(row=0, column=1)
+    tbCodigo = Entry(Form, textvariable=tbCodigo, font=(14))
+    tbCodigo.grid(row=1, column=2)
+    tbNombre = Entry(Form, textvariable=tbNombre, font=(14))
+    tbNombre.grid(row=2, column=2)
+    tbPaterno = Entry(Form, textvariable=tbPaterno, font=(14))
+    tbPaterno.grid(row=3, column=2)
+    tbMaterno = Entry(Form, textvariable=tbMaterno, font=(14))
+    tbMaterno.grid(row=1, column=4)
+    tbFInicio = Entry(Form, textvariable=tbFInicio, font=(14))
+    tbFInicio.grid(row=2, column=4)
+    tbHSalida = Entry(Form, textvariable=tbHSalida, font=(14))
+    tbHSalida.grid(row=3, column=4)
+
+    # Buttons
+    btn1=Button(Botones, text="Pernonal", width=80)
+    btn1.grid(row=0, column=0)
+    btn2=Button(Botones, text="Comisión de servicio", width=80)
+    btn2.grid(row=0, column=1)
 
 def Back():
     gDash.destroy()
