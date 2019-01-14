@@ -101,8 +101,6 @@ def modRegistro():
     #gDash.withdraw()
     gRegistro = Toplevel()
     gRegistro.title("Worknes: Dashboard - Modulo de Registro")
-    foto = PhotoImage(file="LOGO.png")
-    Label(root, image=foto).pack()
     width = 1280
     height = 700
     screen_height = root.winfo_screenwidth()
@@ -126,7 +124,8 @@ def modRegistro():
     Top.pack(side=TOP, fill=X)
     Form = Frame(gRegistro, width=1280, height=700)
     Form.pack(side=TOP, pady=10)
-
+    foto = PhotoImage(file="LOGO.png")
+    Label(gRegistro, image=foto).pack()
     # Labels
     lbTitle = Label(Top, text="Worknesh: Panel de Registro", font=('arial black', 18))
     lbTitle.pack(fill=X)
@@ -147,8 +146,7 @@ def modRegistro():
     lbl_text = Label(Form)
     lbl_text.grid(row=4, columnspan=3)
 
-    foto = PhotoImage(file="LOGO.png")
-    Label(root, image=foto).pack()
+    
 
     # Text o Entrys
     tbBusqueda = Entry(Form, textvariable=tbBusqueda, font=(14))
