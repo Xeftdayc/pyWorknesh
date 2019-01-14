@@ -80,6 +80,17 @@ CREATE TABLE tVacaciones(
     FOREIGN KEY(id_asistencia) REFERENCES tAsistencia(id)
 );
 
+CREATE TABLE tPapeletas(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    tipo TEXT,
+    fecha TEXT,
+    h_salida TEXT,
+    h_retorno TEXT,
+    motivo TEXT,
+    lugar TEXT,
+    autoriza TEXT
+);
+
 CREATE TABLE tUser(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     user TEXT NOT NULL,
